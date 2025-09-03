@@ -4,6 +4,36 @@ import { SOCIALS } from "@/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
+
+export const metadata = {
+  title: 'ThinkTapFast - AI Content Creation SaaS for Businesses & Creators',
+  description: 'Generate text, image, and voice content with ThinkTapFast. AI-powered SaaS for startups, teams, and creators to save time and costs.',
+  keywords: 'AI content creation, content automation, productivity, SaaS, startups, ThinkTapFast',
+  openGraph: {
+    title: 'ThinkTapFast - AI Content Creation SaaS',
+    description: 'AI-powered SaaS to create text, image, and voice content quickly and efficiently.',
+    url: process.env.NEXT_PUBLIC_SITE_URL,
+    siteName: 'ThinkTapFast',
+    images: [
+      {
+        url: '/og-image.png', // OG image goes here
+        width: 1200,
+        height: 630,
+        alt: 'ThinkTapFast AI content creation',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ThinkTapFast - AI Content Creation SaaS',
+    description: 'Create text, image, and voice content with AI. Save time and costs.',
+    images: ['/og-image.png'], // OG image here
+  },
+};
+
+
 export default function Home() {
   return (
     <section className="space-y-6 pb-8 md:pb-12 md:pt-10 lg:py-32">
