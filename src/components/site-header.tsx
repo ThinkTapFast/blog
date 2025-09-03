@@ -27,19 +27,13 @@ export default function SiteHeader() {
             onClick={() => setIsMobileOpen(!isMobileOpen)}
           >
             <>
-              {isMobileOpen ? (
-                <X className="size-6" />
-              ) : (
-                <AlignLeft className="size-6" />
-              )}
+              {isMobileOpen ? <X className="size-6" /> : <AlignLeft className="size-6" />}
               <span className="sr-only">Menu</span>
             </>
           </Button>
         </div>
       </div>
-      {isMobileOpen && (
-        <MobileNav onOpenChange={() => setIsMobileOpen(false)} />
-      )}
+      {isMobileOpen && <MobileNav onOpenChange={() => setIsMobileOpen(false)} />}
     </header>
   );
 }

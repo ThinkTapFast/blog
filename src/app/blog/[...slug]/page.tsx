@@ -27,9 +27,7 @@ async function getBlogFromParams(params: BlogPageItemProps["params"]) {
   return blog;
 }
 
-export async function generateMetadata({
-  params,
-}: BlogPageItemProps): Promise<Metadata> {
+export async function generateMetadata({ params }: BlogPageItemProps): Promise<Metadata> {
   const blog = await getBlogFromParams(params);
 
   if (!blog) {
@@ -45,9 +43,7 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams(): Promise<
-  BlogPageItemProps["params"][]
-> {
+export async function generateStaticParams(): Promise<BlogPageItemProps["params"][]> {
   return allBlogs.map((blog: Blog) => ({
     slug: blog.slugAsParams.split("/"),
   }));
@@ -60,7 +56,7 @@ export default async function BlogPageItem({ params }: Readonly<BlogPageItemProp
     // Return a simple 404 page
     return (
       <div className="container max-w-3xl py-20 text-center">
-        <h1 className="mb-4 font-bold text-4xl">404 - Blog Not Found</h1>
+        <h1 className="mb-4 text-4xl font-bold">404 - Blog Not Found</h1>
         <p className="mb-8">Sorry, the blog post you are looking for does not exist.</p>
         <Link href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
           <ChevronLeft className="mr-2 size-4" />
@@ -74,10 +70,7 @@ export default async function BlogPageItem({ params }: Readonly<BlogPageItemProp
     <article className="container relative max-w-3xl py-6 lg:py-10">
       <div>
         {blog.date && (
-          <time
-            dateTime={blog.date}
-            className="block text-sm text-muted-foreground"
-          >
+          <time dateTime={blog.date} className="block text-sm text-muted-foreground">
             Published on {formatDate(blog.date)}
           </time>
         )}
@@ -97,9 +90,7 @@ export default async function BlogPageItem({ params }: Readonly<BlogPageItemProp
             />
             <div className="flex-1 text-left leading-tight">
               <p className="font-medium">{blog.author}</p>
-              <p className="text-[12px] text-muted-foreground">
-                @{blog.author}
-              </p>
+              <p className="text-[12px] text-muted-foreground">@{blog.author}</p>
             </div>
           </div>
         )}
@@ -117,10 +108,7 @@ export default async function BlogPageItem({ params }: Readonly<BlogPageItemProp
         <Mdx code={blog.body} />
         <hr className="mt-12" />
         <div className="flex justify-center py-6 lg:py-10">
-          <Link
-            href="/blog"
-            className={cn(buttonVariants({ variant: "ghost" }))}
-          >
+          <Link href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
             <ChevronLeft className="mr-2 size-4" />
             See all Blogs
           </Link>

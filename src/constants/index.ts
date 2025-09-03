@@ -7,6 +7,4 @@ export const NAV_LIST = [
   { label: "About", path: "/about", icon: Bot },
 ];
 
-export const SOCIALS = [
-  { label: "Github", path: appConfig.social.github, icon: Icons.github },
-];
+export const SOCIALS = [{ label: "Github", path: appConfig.social.github, icon: Icons.github }];

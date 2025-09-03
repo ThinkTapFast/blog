@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body
         className={cn(
-          "min-h-screen antialiased font-lexend bg-background",
+          "min-h-screen bg-background font-lexend antialiased",
           lexend.variable,
           fontCode.variable,
         )}

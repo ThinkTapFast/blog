@@ -12,9 +12,7 @@ export default function PageHeader({ title, description }: PageHeaderProps) {
         <h1 className="inline-block text-4xl font-bold leading-3 tracking-tight text-primary lg:text-5xl">
           {title}
         </h1>
-        {description && (
-          <p className="text-xl text-muted-foreground">{description}</p>
-        )}
+        {description && <p className="text-xl text-muted-foreground">{description}</p>}
       </div>
     </div>
   );
