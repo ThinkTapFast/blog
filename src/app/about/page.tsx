@@ -3,7 +3,7 @@ import PageHeader from "@/components/page-header";
 import Link from "next/link";
 import Image from "next/image";
 import { buttonVariants } from "@/components/ui/button";
-import { siteConfig } from "@/config/site";
+import { appConfig } from "@/config/app.config";
 import { SOCIALS } from "@/constants";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
@@ -47,13 +47,13 @@ export default function AboutPage() {
         <div className="mx-auto mt-8 w-[400px]">
           <div className="relative flex flex-col items-center gap-2 rounded-md bg-secondary px-4 py-6">
             <Image
-              src={siteConfig.authorImage}
+              src={appConfig.authorImage}
               width={82}
               height={82}
-              alt={siteConfig.name}
+              alt={appConfig.name}
               className="absolute -top-8 mb-4 rounded-full border bg-primary"
             />
-            <h3 className="mt-8 text-lg font-semibold">{siteConfig.author}</h3>
+            <h3 className="mt-8 text-lg font-semibold">{appConfig.author}</h3>
             <p className="text-center text-sm text-muted-foreground">
               Web Developer
             </p>
