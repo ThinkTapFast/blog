@@ -5,10 +5,19 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:sitemap": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "pnpx prettier --write .",
-    "postbuild": "next-sitemap"
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "docker:build": "docker build -t thinktapfast-app .",
+    "docker:run": "docker run -p 3000:3000 --env-file .env.production.local thinktapfast-app",
+    "docker:build:dev": "docker build -t thinktapfast-app-dev -f Dockerfile.dev .",
+    "docker:run:dev:cmd": "docker run -p 3000:3000 --env-file .env.development.local -v %cd%:/app -v /app/node_modules thinktapfast-app-dev",
+    "docker:run:dev:powershell": "powershell -ExecutionPolicy Bypass -File scripts/docker-dev.ps1",
+    "docker:run:dev:mac": "bash scripts/docker-dev.sh",
+    "docker:run:dev:linux": "bash scripts/docker-dev.sh"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",

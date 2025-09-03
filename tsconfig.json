@@ -28,6 +28,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "./.velite"
-  ],
+, "next-sitemap.config.js"  ],
   "exclude": ["node_modules"]
 }
