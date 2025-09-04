@@ -12,12 +12,12 @@ interface BlogSidebarProps {
 export function BlogSidebar({ className, slug, publishDate, readTime }: BlogSidebarProps) {
   return (
     <aside className={className}>
-      <div className="sticky top-6 space-y-6">
+      <div className="sticky top-16 space-y-6">
         {/* Table of Contents */}
         <TableOfContents />
 
         {/* Article Info */}
-        <div className="rounded-lg border bg-card p-4">
+        <div className="rounded-lg border bg-background p-4">
           <h4 className="mb-4 text-sm font-semibold">Article Info</h4>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">

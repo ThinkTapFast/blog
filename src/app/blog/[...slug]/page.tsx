@@ -103,7 +103,7 @@ export default async function BlogPageItem({ params }: Readonly<BlogPageItemProp
                 width={720}
                 height={405}
                 priority
-                className="my-8 border bg-muted transition-colors"
+                className="my-8 w-full border bg-muted transition-colors"
               />
             )}
 

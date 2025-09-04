@@ -72,7 +72,7 @@ export function TableOfContents({ className }: TableOfContentsProps) {
 
   return (
     <div className={cn("sticky top-20", className)}>
-      <div className="rounded-lg border bg-card p-4">
+      <div className="rounded-lg border bg-background p-4">
         <div className="mb-3 flex items-center gap-2">
           <List className="size-4" />
           <h4 className="text-sm font-semibold">Contents</h4>

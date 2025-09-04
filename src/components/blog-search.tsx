@@ -4,10 +4,11 @@ import React, { useState, useMemo } from "react";
 import { Search, Filter, X, Calendar, User } from "lucide-react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+import type { Blog } from "@/types/globals";
 
 interface BlogSearchProps {
-  blogs: any[];
-  onFilter: (filteredBlogs: any[]) => void;
+  blogs: Blog[];
+  onFilter: (filteredBlogs: Blog[]) => void;
   className?: string;
 }
 
@@ -19,7 +20,7 @@ export function BlogSearch({ blogs, onFilter, className }: BlogSearchProps) {
 
   // Extract unique authors and dates
   const authors = useMemo(() => {
-    const authorSet = new Set(blogs.map(blog => blog.author).filter(Boolean));
+    const authorSet = new Set(blogs.map((blog: Blog) => blog.author).filter(Boolean));
     return Array.from(authorSet);
   }, [blogs]);
 
@@ -35,7 +36,7 @@ export function BlogSearch({ blogs, onFilter, className }: BlogSearchProps) {
     // Search filter
     if (searchTerm) {
       filtered = filtered.filter(
-        blog =>
+        (blog: Blog) =>
           blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
           blog.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
           blog.author?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -45,13 +46,13 @@ export function BlogSearch({ blogs, onFilter, className }: BlogSearchProps) {
 
     // Author filter
     if (selectedAuthor) {
-      filtered = filtered.filter(blog => blog.author === selectedAuthor);
+      filtered = filtered.filter((blog: Blog) => blog.author === selectedAuthor);
     }
 
     // Date range filter
     if (selectedDateRange) {
       const currentYear = new Date().getFullYear();
-      filtered = filtered.filter(blog => {
+      filtered = filtered.filter((blog: Blog) => {
         const blogYear = new Date(blog.date).getFullYear();
         if (selectedDateRange === `${currentYear}`) {
           return blogYear === currentYear;

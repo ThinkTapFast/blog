@@ -176,7 +176,7 @@ const components = {
       const codeContent = codeElement.props.children;
       const language = codeElement.props.className?.replace("language-", "") || "text";
 
-      return <CodeBlock code={codeContent} language={language} className={className} />;
+      return <CodeBlock language={language} code={codeContent} className={className} />;
     }
 
     // Fallback to regular pre if no code element found

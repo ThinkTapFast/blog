@@ -29,7 +29,9 @@ export function CodeBlock({ code, language = "javascript", filename, className }
             <div className="size-3 rounded-full bg-yellow-500" />
             <div className="size-3 rounded-full bg-green-500" />
           </div>
-          <span className="text-sm text-zinc-400">{filename || `${language || "text"}`}</span>
+          <span className="text-sm text-zinc-400">
+            {filename || `${language || 'text'}`}
+          </span>
         </div>
         <button
           onClick={copyToClipboard}
@@ -51,8 +53,8 @@ export function CodeBlock({ code, language = "javascript", filename, className }
 
       {/* Code Content */}
       <div className="relative">
-        <pre className="overflow-x-auto p-4 font-mono text-sm">
-          <code className="whitespace-pre text-green-400" data-language={language}>
+        <pre className="overflow-x-auto p-4 text-sm font-mono">
+          <code className="text-green-400 whitespace-pre" data-language={language}>
             {code}
           </code>
         </pre>

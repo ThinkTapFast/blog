@@ -9,6 +9,7 @@ import App from "@/components/app";
 const lexend = Lexend({ subsets: ["latin"], variable: "--font-lexend" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: {
     template: "%s | Mdx Blog Template",
     default: "Mdx Blog Template",

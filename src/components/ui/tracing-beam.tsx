@@ -34,7 +34,7 @@ export const TracingBeam = ({
     return () => window.removeEventListener("resize", handleResize);
   }, [children]);
 
-  const y1 = useSpring(useTransform(scrollYProgress, [0, 0.8], [50, svgHeight - 100]), {
+  const y1 = useSpring(useTransform(scrollYProgress, [0, 0.7], [50, svgHeight - 100]), {
     stiffness: 500,
     damping: 90,
   });
@@ -44,7 +44,7 @@ export const TracingBeam = ({
   });
 
   return (
-    <motion.div ref={ref} className={cn("relative mx-auto h-full w-full max-w-4xl", className)}>
+    <motion.div ref={ref} className={cn("relative mx-auto w-full max-w-4xl", className)}>
       <div className="absolute -left-4 top-3 md:-left-20">
         <motion.div
           className="ml-[27px] flex size-4 items-center justify-center rounded-full border border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-black"
@@ -62,7 +62,7 @@ export const TracingBeam = ({
               backgroundColor: useTransform(
                 scrollYProgress,
                 [0, 0.05],
-                ["rgb(99, 102, 241)", "white"],
+                ["rgb(99, 102, 241)", "#ffffff"],
               ),
               borderColor: useTransform(
                 scrollYProgress,
@@ -76,7 +76,7 @@ export const TracingBeam = ({
           viewBox={`0 0 20 ${svgHeight}`}
           width="20"
           height={svgHeight}
-          className="ml-4 block"
+          className="ml-8 block"
           aria-hidden="true"
         >
           <motion.path
