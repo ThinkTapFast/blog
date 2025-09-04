@@ -71,7 +71,7 @@ export default async function BlogPageItem({ params }: Readonly<BlogPageItemProp
   }
 
   return (
-    <article className="container relative max-w-3xl py-6 lg:py-10">
+    <article className="container relative max-w-4xl py-6 lg:py-10">
       <div>
         {blog.date && (
           <time
@@ -87,7 +87,7 @@ export default async function BlogPageItem({ params }: Readonly<BlogPageItemProp
         </h1>
 
         {blog.author && (
-          <div className="mt-4 flex space-x-4">
+          <div className="mt-4 flex items-center space-x-4">
             <Image
               src={siteConfig.authorImage}
               alt={blog.author}
@@ -108,7 +108,7 @@ export default async function BlogPageItem({ params }: Readonly<BlogPageItemProp
           <Image
             src={blog.image}
             alt={blog.title}
-            width={720}
+            width={820}
             height={405}
             priority
             className="my-8 border bg-muted transition-colors"

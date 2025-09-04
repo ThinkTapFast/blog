@@ -6,6 +6,9 @@ const nextConfig = {
     config.plugins.push(new VeliteWebpackPlugin());
     return config;
   },
+  images:{
+    domains: ['nexacu.com']
+  }
 };
 
 class VeliteWebpackPlugin {
