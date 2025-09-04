@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState, ReactNode } from 'react';
-import { getBrowserCapabilities } from '@/lib/polyfills';
+import { useEffect, useState, ReactNode } from "react";
+import { getBrowserCapabilities } from "@/lib/polyfills";
 
 interface BrowserInfo {
   isModern: boolean;
@@ -17,15 +17,15 @@ export function BrowserCompatibilityProvider({ children }: { children: ReactNode
     setBrowserInfo({
       isModern: info.isModern,
       polyfillsNeeded: info.polyfillsNeeded,
-      capabilities: info.capabilities || {}
+      capabilities: info.capabilities || {},
     });
 
     // Only show compatibility info in development
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       if (info.isModern) {
-        console.log('✅ Modern browser detected - all features supported natively');
+        console.log("✅ Modern browser detected - all features supported natively");
       } else {
-        console.log('🔧 Legacy browser detected - polyfills active for:', info.polyfillsNeeded);
+        console.log("🔧 Legacy browser detected - polyfills active for:", info.polyfillsNeeded);
       }
     }
   }, []);
@@ -34,12 +34,14 @@ export function BrowserCompatibilityProvider({ children }: { children: ReactNode
     <>
       {children}
       {/* Optional: Show browser compatibility badge in development */}
-      {process.env.NODE_ENV === 'development' && browserInfo && (
-        <div 
+      {process.env.NODE_ENV === "development" && browserInfo && (
+        <div
           className="fixed bottom-4 right-4 z-50 rounded-lg bg-black/80 px-3 py-2 text-xs text-white"
-          style={{ fontSize: '10px' }}
+          style={{ fontSize: "10px" }}
         >
-          {browserInfo.isModern ? '✅ Modern Browser' : `🔧 ${browserInfo.polyfillsNeeded.length} Polyfills Active`}
+          {browserInfo.isModern
+            ? "✅ Modern Browser"
+            : `🔧 ${browserInfo.polyfillsNeeded.length} Polyfills Active`}
         </div>
       )}
     </>
