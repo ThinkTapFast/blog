@@ -1,4 +1,5 @@
 import { buttonVariants } from "@/components/ui/button";
+import { BackgroundLines } from "@/components/ui/background-lines";
 import { SOCIALS } from "@/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -35,42 +36,44 @@ export const metadata = {
 
 export default function BlogPage() {
   return (
-    <section className="space-y-6 pb-8 md:pb-12 md:pt-10 lg:py-32">
-      <div className="container mt-6 flex max-w-5xl flex-col items-center gap-4 text-center xl:mt-0">
-        <div className="flex items-center space-x-2">
-          {SOCIALS.map(social => (
+    <BackgroundLines className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-800">
+      <section className="space-y-6 pb-8 md:pb-12 md:pt-10 lg:py-32">
+        <div className="container mt-6 flex max-w-5xl flex-col items-center gap-4 text-center xl:mt-0">
+          <div className="flex items-center space-x-2">
+            {SOCIALS.map(social => (
+              <Link
+                key={social.label}
+                href={social.path}
+                rel="noreferrer"
+                target="_blank"
+                className={cn(
+                  buttonVariants({ variant: "ghost" }),
+                  "size-8 rounded-full bg-primary/80 p-2 px-0 text-primary transition-colors hover:bg-primary",
+                )}
+              >
+                <social.icon className="size-6" />
+                <span className="sr-only">{social.label}</span>
+              </Link>
+            ))}
+          </div>
+          <h1 className="text-3xl capitalize sm:text-5xl md:text-6xl lg:text-7xl">
+            Insights & Stories on <span className="font-code text-yellow-300">AI</span>,{" "}
+            <span className="font-code text-primary">Content Creation</span> & Growth
+          </h1>
+          <p className="max-w-2xl leading-normal text-muted-foreground sm:text-xl sm:leading-8">
+            Explore how ThinkTapFast helps startups, creators, and businesses scale smarter with
+            AI-powered text, image, and voice content.
+          </p>
+          <div className="space-x-4">
             <Link
-              key={social.label}
-              href={social.path}
-              rel="noreferrer"
-              target="_blank"
-              className={cn(
-                buttonVariants({ variant: "ghost" }),
-                "size-8 rounded-full bg-primary/80 p-2 px-0 text-primary transition-colors hover:bg-primary",
-              )}
+              href="/blog"
+              className={cn(buttonVariants({ size: "lg", variant: "secondary" }), "border")}
             >
-              <social.icon className="size-6" />
-              <span className="sr-only">{social.label}</span>
+              📚 Read the Blog
             </Link>
-          ))}
+          </div>
         </div>
-        <h1 className="text-3xl capitalize sm:text-5xl md:text-6xl lg:text-7xl">
-          Insights & Stories on <span className="font-code text-yellow-300">AI</span>,{" "}
-          <span className="font-code text-primary">Content Creation</span> & Growth
-        </h1>
-        <p className="max-w-2xl leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-          Explore how ThinkTapFast helps startups, creators, and businesses scale smarter with
-          AI-powered text, image, and voice content.
-        </p>
-        <div className="space-x-4">
-          <Link
-            href="/blog"
-            className={cn(buttonVariants({ size: "lg", variant: "secondary" }), "border")}
-          >
-            📚 Read the Blog
-          </Link>
-        </div>
-      </div>
-    </section>
+      </section>
+    </BackgroundLines>
   );
 }

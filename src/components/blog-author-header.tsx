@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -14,17 +14,17 @@ interface BlogAuthorHeaderProps {
 
 export function BlogAuthorHeader({ authorName, publishDate, readTime }: BlogAuthorHeaderProps) {
   const author = getAuthor(authorName);
-  
+
   // Fallback if author not found in config
   const authorData = author || {
     name: authorName,
-    username: authorName.toLowerCase().replace(/\s+/g, ''),
+    username: authorName.toLowerCase().replace(/\s+/g, ""),
     avatar: "/images/author/abdelkabir.jpeg",
     bio: "Blog author",
     social: {
       github: undefined,
-      twitter: undefined
-    }
+      twitter: undefined,
+    },
   };
 
   return (
@@ -32,9 +32,7 @@ export function BlogAuthorHeader({ authorName, publishDate, readTime }: BlogAuth
       {/* Publication Info */}
       {publishDate && (
         <div className="mb-6 flex items-center gap-4 text-sm text-muted-foreground">
-          <time dateTime={publishDate}>
-            Published on {formatDate(publishDate)}
-          </time>
+          <time dateTime={publishDate}>Published on {formatDate(publishDate)}</time>
           {readTime && (
             <>
               <span>•</span>
@@ -60,18 +58,12 @@ export function BlogAuthorHeader({ authorName, publishDate, readTime }: BlogAuth
         {/* Author Details */}
         <div className="min-w-0 flex-1">
           <div className="mb-1 flex items-center gap-2">
-            <h3 className="text-lg font-semibold text-foreground">
-              {authorData.name}
-            </h3>
-            <span className="text-sm text-muted-foreground">
-              @{authorData.username}
-            </span>
+            <h3 className="text-lg font-semibold text-foreground">{authorData.name}</h3>
+            <span className="text-sm text-muted-foreground">@{authorData.username}</span>
           </div>
-          
+
           {authorData.bio && (
-            <p className="mb-3 text-sm leading-relaxed text-muted-foreground">
-              {authorData.bio}
-            </p>
+            <p className="mb-3 text-sm leading-relaxed text-muted-foreground">{authorData.bio}</p>
           )}
 
           {/* Social Links */}

@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { List } from "lucide-react";
 
 interface TocItem {
   id: string;
@@ -18,8 +19,8 @@ export function TableOfContents({ className }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
-    // Extract headings from the content
-    const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    // Extract headings from the content (skip h1, focus on h2-h4)
+    const headings = document.querySelectorAll("h2, h3, h4");
     const tocItems: TocItem[] = [];
 
     headings.forEach((heading, index) => {
@@ -27,11 +28,11 @@ export function TableOfContents({ className }: TableOfContentsProps) {
       if (!heading.id) {
         heading.id = id;
       }
-      
+
       tocItems.push({
         id,
-        title: heading.textContent || '',
-        level: parseInt(heading.tagName.charAt(1))
+        title: heading.textContent || "",
+        level: parseInt(heading.tagName.charAt(1)),
       });
     });
 
@@ -39,20 +40,20 @@ export function TableOfContents({ className }: TableOfContentsProps) {
 
     // Set up intersection observer for active heading
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             setActiveId(entry.target.id);
           }
         });
       },
       {
-        rootMargin: '-20% 0% -35% 0%',
-        threshold: 0
-      }
+        rootMargin: "-20% 0% -80% 0%",
+        threshold: 0,
+      },
     );
 
-    headings.forEach((heading) => observer.observe(heading));
+    headings.forEach(heading => observer.observe(heading));
 
     return () => observer.disconnect();
   }, []);
@@ -61,8 +62,8 @@ export function TableOfContents({ className }: TableOfContentsProps) {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+        behavior: "smooth",
+        block: "start",
       });
     }
   };
@@ -70,32 +71,35 @@ export function TableOfContents({ className }: TableOfContentsProps) {
   if (toc.length === 0) return null;
 
   return (
-    <div className={cn("space-y-2", className)}>
-      <h4 className="mb-4 text-sm font-semibold text-foreground">On This Page</h4>
-      <nav>
-        <ul className="space-y-2">
-          {toc.map((item) => (
-            <li key={item.id}>
-              <button
-                onClick={() => scrollToHeading(item.id)}
-                className={cn(
-                  "text-left w-full text-sm transition-colors hover:text-foreground",
-                  "block py-1 pr-2 text-muted-foreground",
-                  {
-                    "text-foreground font-medium": activeId === item.id,
-                    "pl-0": item.level === 1,
-                    "pl-3": item.level === 2,
-                    "pl-6": item.level === 3,
-                    "pl-9": item.level >= 4,
-                  }
-                )}
-              >
-                {item.title}
-              </button>
-            </li>
+    <div className={cn("sticky top-20", className)}>
+      <div className="rounded-lg border bg-card p-4">
+        <div className="mb-3 flex items-center gap-2">
+          <List className="size-4" />
+          <h4 className="text-sm font-semibold">Contents</h4>
+        </div>
+
+        <nav className="space-y-1">
+          {toc.map(item => (
+            <button
+              key={item.id}
+              onClick={() => scrollToHeading(item.id)}
+              className={cn(
+                "w-full text-left text-xs transition-colors hover:text-primary",
+                "block py-1",
+                {
+                  "font-medium text-primary": activeId === item.id,
+                  "text-muted-foreground": activeId !== item.id,
+                  "pl-0": item.level === 2,
+                  "pl-3": item.level === 3,
+                  "pl-6": item.level === 4,
+                },
+              )}
+            >
+              {item.title}
+            </button>
           ))}
-        </ul>
-      </nav>
+        </nav>
+      </div>
     </div>
   );
 }

@@ -8,4 +8,7 @@ export interface Blog {
   image?: string;
   author: string;
   body: string;
+  tags?: string[];
+  readTime?: number;
+  featured?: boolean;
 }

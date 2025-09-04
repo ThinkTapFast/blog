@@ -4,6 +4,7 @@ import React, { HTMLAttributes } from "react";
 import * as runtime from "react/jsx-runtime";
 
 import Image from "next/image";
+import { CodeBlock } from "@/components/ui/code-block";
 
 const useMDXComponent = (code: string) => {
   const fn = new Function(code);
@@ -16,15 +17,15 @@ type ComponentsProps = HTMLAttributes<HTMLElement>;
 const generateId = (text: string) => {
   return text
     .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
     .trim();
 };
 
 const components = {
   h1: ({ className, children, ...props }: ComponentsProps) => {
-    const id = generateId(children?.toString() || '');
+    const id = generateId(children?.toString() || "");
     return (
       <h1
         id={id}
@@ -36,7 +37,7 @@ const components = {
     );
   },
   h2: ({ className, children, ...props }: ComponentsProps) => {
-    const id = generateId(children?.toString() || '');
+    const id = generateId(children?.toString() || "");
     return (
       <h2
         id={id}
@@ -51,7 +52,7 @@ const components = {
     );
   },
   h3: ({ className, children, ...props }: ComponentsProps) => {
-    const id = generateId(children?.toString() || '');
+    const id = generateId(children?.toString() || "");
     return (
       <h3
         id={id}
@@ -66,7 +67,7 @@ const components = {
     );
   },
   h4: ({ className, children, ...props }: ComponentsProps) => {
-    const id = generateId(children?.toString() || '');
+    const id = generateId(children?.toString() || "");
     return (
       <h4
         id={id}
@@ -81,7 +82,7 @@ const components = {
     );
   },
   h5: ({ className, children, ...props }: ComponentsProps) => {
-    const id = generateId(children?.toString() || '');
+    const id = generateId(children?.toString() || "");
     return (
       <h5
         id={id}
@@ -96,7 +97,7 @@ const components = {
     );
   },
   h6: ({ className, children, ...props }: ComponentsProps) => {
-    const id = generateId(children?.toString() || '');
+    const id = generateId(children?.toString() || "");
     return (
       <h6
         id={id}
@@ -165,15 +166,32 @@ const components = {
       {...props}
     />
   ),
-  pre: ({ className, ...props }: ComponentsProps) => (
-    <pre
-      className={cn(
-        "mb-4 mt-6 overflow-x-auto rounded-lg border !bg-secondary py-4 text-sm",
-        className,
-      )}
-      {...props}
-    />
-  ),
+  pre: ({ className, children, ...props }: ComponentsProps) => {
+    // Extract code content and language from children
+    const codeElement = React.Children.toArray(children).find(
+      (child): child is React.ReactElement => React.isValidElement(child) && child.type === "code",
+    );
+
+    if (codeElement && codeElement.props) {
+      const codeContent = codeElement.props.children;
+      const language = codeElement.props.className?.replace("language-", "") || "text";
+
+      return <CodeBlock code={codeContent} language={language} className={className} />;
+    }
+
+    // Fallback to regular pre if no code element found
+    return (
+      <pre
+        className={cn(
+          "mb-4 mt-6 overflow-x-auto rounded-lg border !bg-secondary py-4 text-sm",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </pre>
+    );
+  },
   code: ({ className, ...props }: ComponentsProps) => (
     <code
       className={cn(

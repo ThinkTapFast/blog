@@ -13,6 +13,9 @@ import { buttonVariants } from "@/components/ui/button";
 import { BlogAuthorHeader } from "@/components/blog-author-header";
 import { BlogSidebar } from "@/components/blog-sidebar";
 import { ClientOnly } from "@/components/client-only";
+import { RelatedPosts } from "@/components/related-posts";
+import { BlogTags } from "@/components/blog-tags";
+import { TracingBeam } from "@/components/ui/tracing-beam";
 
 interface BlogPageItemProps {
   readonly params: {
@@ -76,7 +79,7 @@ export default async function BlogPageItem({ params }: Readonly<BlogPageItemProp
           {/* Main Article Content */}
           <article className="lg:col-span-3">
             {/* Enhanced Author Header Section */}
-            <BlogAuthorHeader 
+            <BlogAuthorHeader
               authorName={blog.author || "Anonymous"}
               publishDate={blog.date}
               readTime="5 min" // You can calculate this dynamically later
@@ -85,6 +88,13 @@ export default async function BlogPageItem({ params }: Readonly<BlogPageItemProp
             <h1 className="mt-2 inline-block text-4xl font-bold capitalize leading-tight text-primary lg:text-5xl">
               {blog.title}
             </h1>
+
+            {/* Tags */}
+            {blog.tags && (
+              <div className="mt-4">
+                <BlogTags tags={blog.tags} />
+              </div>
+            )}
 
             {blog.image && (
               <Image
@@ -96,13 +106,18 @@ export default async function BlogPageItem({ params }: Readonly<BlogPageItemProp
                 className="my-8 border bg-muted transition-colors"
               />
             )}
-            
-            <div className="prose-lg prose max-w-none dark:prose-invert">
-              <Mdx code={blog.body} />
-            </div>
-            
-            <hr className="mt-12" />
-            <div className="flex justify-center py-6 lg:py-10">
+
+            <TracingBeam className="px-0">
+              <div className="prose-lg prose dark:prose-invert max-w-none">
+                <Mdx code={blog.body} />
+              </div>
+            </TracingBeam>
+
+            {/* Related Posts */}
+            <RelatedPosts currentPost={blog} allPosts={allBlogs} maxPosts={3} />
+
+            <hr className="mt-8" />
+            <div className="flex justify-center py-4">
               <Link href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
                 <ChevronLeft className="mr-2 size-4" />
                 See all Blogs
@@ -111,10 +126,15 @@ export default async function BlogPageItem({ params }: Readonly<BlogPageItemProp
           </article>
 
           {/* Sidebar - Hidden on mobile, visible on desktop */}
-          <ClientOnly 
+          <ClientOnly
             fallback={<div className="hidden animate-pulse rounded-lg bg-muted lg:block lg:w-64" />}
           >
-            <BlogSidebar className="hidden lg:block" />
+            <BlogSidebar
+              className="hidden lg:block"
+              slug={blog.slug}
+              publishDate={blog.date}
+              readTime={blog.readTime || 5}
+            />
           </ClientOnly>
         </div>
       </div>
