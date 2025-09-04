@@ -1,3 +1,4 @@
+import "../polyfills";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Lexend } from "next/font/google";

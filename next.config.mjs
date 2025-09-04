@@ -2,8 +2,15 @@ import { build } from "velite";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    esmExternals: false
+  },
   webpack: (config) => {
     config.plugins.push(new VeliteWebpackPlugin());
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+    };
     return config;
   },
 };
