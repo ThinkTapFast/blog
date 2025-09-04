@@ -12,58 +12,104 @@ const useMDXComponent = (code: string) => {
 
 type ComponentsProps = HTMLAttributes<HTMLElement>;
 
+// Utility function to generate heading IDs
+const generateId = (text: string) => {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+};
+
 const components = {
-  h1: ({ className, ...props }: ComponentsProps) => (
-    <h1
-      className={cn("mt-2 scroll-m-20 text-4xl font-bold tracking-tight text-primary", className)}
-      {...props}
-    />
-  ),
-  h2: ({ className, ...props }: ComponentsProps) => (
-    <h2
-      className={cn(
-        "mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight text-primary first:mt-0",
-        className,
-      )}
-      {...props}
-    />
-  ),
-  h3: ({ className, ...props }: ComponentsProps) => (
-    <h3
-      className={cn(
-        "mt-8 scroll-m-20 text-2xl font-semibold tracking-tight text-primary",
-        className,
-      )}
-      {...props}
-    />
-  ),
-  h4: ({ className, ...props }: ComponentsProps) => (
-    <h4
-      className={cn(
-        "mt-8 scroll-m-20 text-xl font-semibold tracking-tight text-primary",
-        className,
-      )}
-      {...props}
-    />
-  ),
-  h5: ({ className, ...props }: ComponentsProps) => (
-    <h5
-      className={cn(
-        "mt-8 scroll-m-20 text-lg font-semibold tracking-tight text-primary",
-        className,
-      )}
-      {...props}
-    />
-  ),
-  h6: ({ className, ...props }: ComponentsProps) => (
-    <h6
-      className={cn(
-        "mt-8 scroll-m-20 text-base font-semibold tracking-tight text-primary",
-        className,
-      )}
-      {...props}
-    />
-  ),
+  h1: ({ className, children, ...props }: ComponentsProps) => {
+    const id = generateId(children?.toString() || '');
+    return (
+      <h1
+        id={id}
+        className={cn("mt-2 scroll-m-20 text-4xl font-bold tracking-tight text-primary", className)}
+        {...props}
+      >
+        {children}
+      </h1>
+    );
+  },
+  h2: ({ className, children, ...props }: ComponentsProps) => {
+    const id = generateId(children?.toString() || '');
+    return (
+      <h2
+        id={id}
+        className={cn(
+          "mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight text-primary first:mt-0",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </h2>
+    );
+  },
+  h3: ({ className, children, ...props }: ComponentsProps) => {
+    const id = generateId(children?.toString() || '');
+    return (
+      <h3
+        id={id}
+        className={cn(
+          "mt-8 scroll-m-20 text-2xl font-semibold tracking-tight text-primary",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </h3>
+    );
+  },
+  h4: ({ className, children, ...props }: ComponentsProps) => {
+    const id = generateId(children?.toString() || '');
+    return (
+      <h4
+        id={id}
+        className={cn(
+          "mt-8 scroll-m-20 text-xl font-semibold tracking-tight text-primary",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </h4>
+    );
+  },
+  h5: ({ className, children, ...props }: ComponentsProps) => {
+    const id = generateId(children?.toString() || '');
+    return (
+      <h5
+        id={id}
+        className={cn(
+          "mt-8 scroll-m-20 text-lg font-semibold tracking-tight text-primary",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </h5>
+    );
+  },
+  h6: ({ className, children, ...props }: ComponentsProps) => {
+    const id = generateId(children?.toString() || '');
+    return (
+      <h6
+        id={id}
+        className={cn(
+          "mt-8 scroll-m-20 text-base font-semibold tracking-tight text-primary",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </h6>
+    );
+  },
   a: ({ className, ...props }: ComponentsProps) => (
     <a
       className={cn("font-medium text-primary underline underline-offset-4", className)}

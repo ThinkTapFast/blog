@@ -11,6 +11,8 @@ import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { BlogAuthorHeader } from "@/components/blog-author-header";
+import { BlogSidebar } from "@/components/blog-sidebar";
+import { ClientOnly } from "@/components/client-only";
 
 interface BlogPageItemProps {
   readonly params: {
@@ -67,38 +69,55 @@ export default async function BlogPageItem({ params }: Readonly<BlogPageItemProp
   }
 
   return (
-    <article className="container relative max-w-3xl py-6 lg:py-10">
-      <div>
-        {/* Enhanced Author Header Section */}
-        <BlogAuthorHeader 
-          authorName={blog.author || "Anonymous"}
-          publishDate={blog.date}
-          readTime="5 min" // You can calculate this dynamically later
-        />
+    <div className="container relative py-6 lg:py-10">
+      <div className="mx-auto max-w-7xl">
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
+          {/* Main Article Content */}
+          <article className="lg:col-span-3">
+            {/* Enhanced Author Header Section */}
+            <BlogAuthorHeader 
+              authorName={blog.author || "Anonymous"}
+              publishDate={blog.date}
+              readTime="5 min" // You can calculate this dynamically later
+            />
 
-        <h1 className="mt-2 inline-block text-4xl font-bold capitalize leading-tight text-primary lg:text-5xl">
-          {blog.title}
-        </h1>
+            <h1 className="mt-2 inline-block text-4xl font-bold capitalize leading-tight text-primary lg:text-5xl">
+              {blog.title}
+            </h1>
 
-        {blog.image && (
-          <Image
-            src={blog.image}
-            alt={blog.title}
-            width={720}
-            height={405}
-            priority
-            className="my-8 border bg-muted transition-colors"
-          />
-        )}
-        <Mdx code={blog.body} />
-        <hr className="mt-12" />
-        <div className="flex justify-center py-6 lg:py-10">
-          <Link href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
-            <ChevronLeft className="mr-2 size-4" />
-            See all Blogs
-          </Link>
+            {blog.image && (
+              <Image
+                src={blog.image}
+                alt={blog.title}
+                width={720}
+                height={405}
+                priority
+                className="my-8 border bg-muted transition-colors"
+              />
+            )}
+            
+            <div className="prose-lg prose max-w-none dark:prose-invert">
+              <Mdx code={blog.body} />
+            </div>
+            
+            <hr className="mt-12" />
+            <div className="flex justify-center py-6 lg:py-10">
+              <Link href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
+                <ChevronLeft className="mr-2 size-4" />
+                See all Blogs
+              </Link>
+            </div>
+          </article>
+
+          {/* Sidebar - Hidden on mobile, visible on desktop */}
+          <ClientOnly 
+            fallback={<div className="hidden animate-pulse rounded-lg bg-muted lg:block lg:w-64" />}
+          >
+            <BlogSidebar className="hidden lg:block" />
+          </ClientOnly>
         </div>
       </div>
-    </article>
+    </div>
   );
 }
