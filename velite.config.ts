@@ -20,6 +20,9 @@ const blogs = defineCollection({
       published: s.boolean().default(true),
       image: s.string().max(99),
       author: s.string(),
+      tags: s.array(s.string()).optional(),
+      readTime: s.number().optional(),
+      featured: s.boolean().optional(),
       body: s.mdx(),
     })
     .transform(computedFields),

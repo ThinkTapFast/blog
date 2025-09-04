@@ -11,6 +11,7 @@ import App from "@/components/app";
 const lexend = Lexend({ subsets: ["latin"], variable: "--font-lexend" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: {
     template: "%s | Mdx Blog Template",
     default: "Mdx Blog Template",
@@ -31,7 +32,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body
         className={cn(
-          "min-h-screen antialiased font-lexend bg-background",
+          "min-h-screen bg-background font-lexend antialiased",
           lexend.variable,
           fontCode.variable,
         )}

@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { siteConfig } from "@/config/site";
+import { appConfig } from "@/config/app.config";
 import { Bot, Rss } from "lucide-react";
 
 export const NAV_LIST = [
@@ -7,8 +7,4 @@ export const NAV_LIST = [
   { label: "About", path: "/about", icon: Bot },
 ];
 
-export const SOCIALS = [
-  { label: "Github", path: siteConfig.social.github, icon: Icons.github },
-  { label: "Facebook", path: siteConfig.social.facebook, icon: Icons.facebook },
-  { label: "Twitter", path: siteConfig.social.twitter, icon: Icons.x },
-];
+export const SOCIALS = [{ label: "Github", path: appConfig.social.github, icon: Icons.github }];

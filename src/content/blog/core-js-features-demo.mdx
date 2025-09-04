@@ -1,0 +1,98 @@
+---
+title: "[Example] Core-js Powers Modern JavaScript Features"
+description: "See how core-js enables modern JavaScript in your blog content, even on older browsers"
+image: "/images/blog/any-considered.webp"
+date: "2025-09-04"
+author: "Abdelkabir"
+tags: ["javascript", "core-js", "polyfills", "browser-compatibility"]
+readTime: 8
+---
+
+# Core-js Features in Action
+
+This blog post demonstrates how **core-js polyfills** enable modern JavaScript features in your MDX content, ensuring compatibility across all browsers.
+
+## Array Methods (Polyfilled by Core-js)
+
+```javascript
+// These methods work in IE11+ thanks to core-js
+const posts = ['intro', 'advanced', 'tutorial'];
+
+// Array.includes (IE11 needs polyfill)
+const hasIntro = posts.includes('intro'); // ✅ Works everywhere
+
+// Array.find (IE11 needs polyfill)
+const foundPost = posts.find(post => post.startsWith('adv')); // ✅ Works everywhere
+
+// Array.findIndex (IE11 needs polyfill)
+const introIndex = posts.findIndex(post => post === 'intro'); // ✅ Works everywhere
+```
+
+## Object Methods (Polyfilled by Core-js)
+
+```javascript
+// Modern object methods work across all browsers
+const blogMeta = { title: 'My Post', date: '2025-09-04' };
+
+// Object.entries (IE11 needs polyfill)
+Object.entries(blogMeta).forEach(([key, value]) => {
+  console.log(`${key}: ${value}`); // ✅ Works everywhere
+});
+
+// Object.values (IE11 needs polyfill)
+const values = Object.values(blogMeta); // ✅ Works everywhere
+
+// Object.assign (IE11 needs polyfill)
+const extendedMeta = Object.assign({}, blogMeta, { author: 'You' }); // ✅ Works everywhere
+```
+
+## String Methods (Polyfilled by Core-js)
+
+```javascript
+const postTitle = "How to use Core-js in your MDX blog";
+
+// String.includes (IE11 needs polyfill)
+const isAboutCoreJs = postTitle.includes('Core-js'); // ✅ Works everywhere
+
+// String.startsWith (IE11 needs polyfill)
+const isHowTo = postTitle.startsWith('How to'); // ✅ Works everywhere
+
+// String.endsWith (IE11 needs polyfill)
+const isAboutBlog = postTitle.endsWith('blog'); // ✅ Works everywhere
+```
+
+## Modern Collections (Polyfilled by Core-js)
+
+```javascript
+// Map and Set work in older browsers
+const tagMap = new Map([
+  ['javascript', 'JavaScript'],
+  ['typescript', 'TypeScript'],
+  ['react', 'React']
+]); // ✅ Works in IE11+
+
+const uniqueTags = new Set(['javascript', 'typescript', 'javascript']); // ✅ Works in IE11+
+```
+
+## Browser Compatibility
+
+Thanks to core-js, this blog supports:
+
+- ✅ **Internet Explorer 11+**
+- ✅ **Chrome 40+**
+- ✅ **Firefox 35+**
+- ✅ **Safari 9+**
+- ✅ **Edge (all versions)**
+- ✅ **Mobile browsers**
+
+## Development Features
+
+In development mode, you can see polyfill activity in the browser console:
+
+```javascript
+// Console output examples:
+console.log('🔧 Core-js polyfills applied for: Array.includes, String.startsWith, Map');
+console.log('✅ Modern browser detected - all features supported natively');
+```
+
+Your MDX content can use modern JavaScript features confidently, knowing core-js provides seamless backward compatibility!
