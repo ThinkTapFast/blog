@@ -1,4 +1,4 @@
-import authorAvatar from "../../public/images/author/devbertskie.png";
+import authorAvatar from "../../public/images/author/abdelkabir.jpeg";
 export const appConfig = {
   name: "ThinkTapFast | Blog",
   description:
