@@ -1,4 +1,5 @@
 import "../polyfills";
+import "@/lib/polyfills"; // Smart browser capability detection
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Lexend } from "next/font/google";
